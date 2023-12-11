@@ -366,25 +366,25 @@ for i in range(len(images)):
 
     resized = cv2.resize(out_img, (480,360), interpolation = cv2.INTER_LANCZOS4)
     rad = (left_curverad+right_curverad)/2
-    if abs(left_curverad)>=10 and abs(right_curverad)<10:
+    if abs(left_curverad)>=1.2 and abs(right_curverad)<1.2:
         rad=np.sign(right_curverad)*0.25+right_curverad
-    elif abs(right_curverad)>=10 and abs(left_curverad)<10:
+    elif abs(right_curverad)>=1.2 and abs(left_curverad)<1.2:
         rad=np.sign(left_curverad)*0.25+left_curverad
-    elif abs(left_curverad)>=10 and abs(right_curverad)>=10:
+    elif abs(left_curverad)>=1.2 and abs(right_curverad)>=1.2:
         rad=np.inf
-    if rad!=np.inf:
-        if len(radstock)>=3:
-            radstock.pop(0)
-        radstock.append(rad)
-        radmean=np.mean(radstock)
-        k=0
-    elif k>=5:
-        radmean=np.inf
-        k+=1
-    else:
-        radmean=np.mean(radstock)
-        k+=1
-    cv2.putText(resized,'Curve Radius [m]: '+ str(np.round(radmean,2)),(10,15), cv2.FONT_HERSHEY_PLAIN, 1, (255,255,255),1,cv2.LINE_AA)
+    # if rad!=np.inf:
+    #     if len(radstock)>=3:
+    #         radstock.pop(0)
+    #     radstock.append(rad)
+    #     radmean=np.mean(radstock)
+    #     k=0
+    # elif k>=5:
+    #     radmean=np.inf
+    #     k+=1
+    # else:
+    #     radmean=np.mean(radstock)
+    #     k+=1
+    cv2.putText(resized,'Curve Radius [m]: '+ str(np.round(rad,2)),(10,15), cv2.FONT_HERSHEY_PLAIN, 1, (255,255,255),1,cv2.LINE_AA)
     cv2.putText(resized,'Center Offset [m]: '+ str(np.round(veh_pos,2)),(10,30), cv2.FONT_HERSHEY_PLAIN, 1,(255,255,255),1,cv2.LINE_AA)
     cv2.putText(resized,'Lfit: '+str(np.round(left_fit_cr[0],2)),(10,45), cv2.FONT_HERSHEY_PLAIN, 1,(255,255,255),1,cv2.LINE_AA)
     cv2.putText(resized,'Rfit: '+str(np.round(right_fit_cr[0],2)),(10,60), cv2.FONT_HERSHEY_PLAIN, 1,(255,255,255),1,cv2.LINE_AA)
