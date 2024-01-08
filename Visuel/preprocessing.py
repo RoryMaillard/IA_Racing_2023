@@ -213,6 +213,7 @@ for i in range(len(images)):
                         left_fit[1]*nonzeroy + left_fit[2] + margin)))
             left_lanex_inds = nonzerox[left_lane_inds]
             left_laney_inds = nonzeroy[left_lane_inds]
+            leftx_base = math.ceil(np.mean(left_lanex_inds[:10]))
         except:
             left_lane_inds = []
             left_lanex_inds = []
@@ -223,6 +224,7 @@ for i in range(len(images)):
                         right_fit[1]*nonzeroy + right_fit[2] + margin)))
             right_lanex_inds = nonzerox[right_lane_inds]
             right_laney_inds = nonzeroy[right_lane_inds]
+            rightx_base = math.ceil(np.mean(right_lanex_inds[:10]))
 
         except:
             right_lane_inds = []
