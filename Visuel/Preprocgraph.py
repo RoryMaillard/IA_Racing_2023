@@ -111,8 +111,13 @@ r=0
 l=0
 k=0
 #######################################################
+DIM = images[0].shape[:2][::-1]
+K=np.array([[76.40210369377033, 0.0, 85.17741324657462], [0.0, 75.55575570884872, 61.5111216120113], [0.0, 0.0, 1.0]])
+D=np.array([[0.032858036745614], [-0.09739958496116238], [0.07344214252074698], [-0.02977154953395648]])
+map1, map2 = cv2.fisheye.initUndistortRectifyMap(K, D, np.eye(3), K, DIM, cv2.CV_16SC2)
+#######################################################
 for i in range(len(images)):
-    imagex=images[i]
+    imagex=cv2.remap(images[i], map1, map2, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
     ##########################################################
     # Convert to grayscale, blur, and perform edge detection #
     ##########################################################
@@ -415,9 +420,9 @@ for i in range(len(images)):
     cv2.putText(resized, 'Steering: '+str(np.round(labels[nametosave]["user/angle"],2)),(10,90), cv2.FONT_HERSHEY_PLAIN, 1,(255,0,0),1,cv2.LINE_AA)
     cv2.putText(resized,'image n '+str(i),(10,45), cv2.FONT_HERSHEY_PLAIN, 1,(255, 0, 0),1,cv2.LINE_AA)
     cv2.putText(resized,'veh_pos_bis '+str(np.round(dist,2)),(10,60), cv2.FONT_HERSHEY_PLAIN, 1,(255, 0, 0),1,cv2.LINE_AA)
-    #plt.imshow(resized,animated=True)
+    plt.imshow(resized,animated=True)
     plt.draw()
-    plt.pause(0.01)#-time.time()+start_time)
+    plt.pause(0.001)#-time.time()+start_time)
     plt.clf()
     plt.title('Fps:'+str(np.round(1/(time.time()-start_time),1)),loc='left')
     start_time = time.time()
