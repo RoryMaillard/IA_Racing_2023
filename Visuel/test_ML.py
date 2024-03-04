@@ -20,7 +20,7 @@ def test_ML():
 
     X = X.reshape(-1, 70, 160, 1)
 
-    Y=model.predict(X)
+    Y=model(X, training=False)
 
 if __name__ == "__main__":
     profiler = line_profiler.LineProfiler()
