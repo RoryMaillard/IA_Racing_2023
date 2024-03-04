@@ -4,10 +4,10 @@ import line_profiler
 
 from keras.saving import load_model
 
-IMAGE_DIR = "dataset_drive14\\images"
-LABEL_DIR = "dataset_drive14"
+IMAGE_DIR = "datasets\\dataset_drive14\\images"
+LABEL_DIR = "datasets\\dataset_drive14"
 
-model= load_model("model.h5")
+model= load_model("models/model.h5")
 
 img=cv2.imread(IMAGE_DIR+"\\140_cam_image_array_.jpg")
 
