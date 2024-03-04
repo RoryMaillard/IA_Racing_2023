@@ -1,3 +1,4 @@
 .vscode/
 !/computer_vision/datasets
 /computer_vision/datasets/*
+!/computer_vision/datasets/.keep
